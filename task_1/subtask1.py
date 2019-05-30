@@ -1,4 +1,4 @@
-def print_var_type(var1, var2, var3):
+def print_var_type(var1: str, var2: str, var3: str) -> None:
     print('Типы переменных. {}:{}, {}:{}, {}:{}'.format(var1, type(var1), var2, type(var2), var3, type(var3)))
 
 
