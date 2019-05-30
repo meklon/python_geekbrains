@@ -1,4 +1,4 @@
-def str_to_bytes(_var) -> bytes:
+def str_to_bytes(_var: str) -> bytes:
     return bytes(_var, 'utf-8')
 
 
