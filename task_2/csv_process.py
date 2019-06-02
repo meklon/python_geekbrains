@@ -1,3 +1,4 @@
+import os
 from os import listdir
 from os.path import isfile, join
 from pathlib import Path
@@ -84,10 +85,17 @@ def save_to_csv(df: DataFrame, path: str) -> None:
     df.to_csv(path, sep=';', index=False)
 
 
+def check_mkdir_output_path(path_output: str) -> None:
+    # Function checks if the output path exists and creates it if not
+    if not os.path.exists(path_output):
+        os.mkdir(path_output)
+
+
 def main():
     files_paths = get_file_list('data/csv/')
     df = get_df_total(files_paths)
     print(df)
+    check_mkdir_output_path('result/')
     save_to_csv(df, 'result/data.csv')
 
 
