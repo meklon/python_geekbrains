@@ -11,7 +11,7 @@ def write_order_to_json(item: str, quantity: int, price: float, buyer: str, date
 
     with open(output_file, 'w') as file:
         json.dump(order, file, indent=4)
-
+    file.close()
 
 def check_mkdir_output_path(path_output: str) -> None:
     # Function checks if the output path exists and creates it if not

@@ -77,6 +77,8 @@ def get_df_total(files_paths: List[str]) -> DataFrame:
 
     # Removing empty row
     df = df.drop([0])
+    # Do some other data processing with pandas DataFrame...
+
     return df
 
 
