@@ -1,14 +1,20 @@
+import json
 import socket
 
 import init
 
+MESSAGE: dict = {
+    "item": "GFD-14 Neurotoxin",
+    "quantity": 23,
+    "price": 599.99,
+    "buyer": "Andrew Wiggin",
+    "date": "2018-08-03T10:51:42"
+}
 
-def get_data_from_client(client):
-    while True:
-        data = client.recv(1024)
-        if not data:
-            break
-        client.send(data.upper())
+
+def get_data_from_client(client) -> bytes:
+    data = client.recv(1024)
+
     return data
 
 
@@ -25,9 +31,16 @@ def main():
         while True:
             client, address = sock.accept()
             print(f'Client was detected {address}')
-            data = get_data_from_client(client)
-            print(data.decode(encoding))
-            client.send(data)
+            data_by = get_data_from_client(client)
+            data = data_by.decode(encoding)
+            print(data)
+            if 'toxin' in data:
+                response = json.dumps(MESSAGE, ensure_ascii=False).encode("utf-8")
+            else:
+                response = 'No information for you. Try to ask about toxins'
+                response = response.encode()
+
+            client.send(response)
             client.close()
     except KeyboardInterrupt:
         pass

@@ -1,3 +1,4 @@
+import json
 import socket
 
 import init
@@ -14,7 +15,13 @@ def main():
         sock.send(data.encode(encoding))
 
         response = sock.recv(buffersize)
-        print(response.decode(encoding))
+        try:
+            data = json.loads(response.decode("utf-8"))
+            print('Server responsed with data about item buyer')
+            print(f'Item: {data["item"]}, price: {data["price"]}, buyer: {data["buyer"]}')
+
+        except json.decoder.JSONDecodeError:
+            print('Cannot decode JSON. Received message: {}'.format(response.decode(encoding)))
 
     except KeyboardInterrupt:
         pass
