@@ -1,1 +1,4 @@
 chardet
+pandas
+pyyaml
+docker-compose
